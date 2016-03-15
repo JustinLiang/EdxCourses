@@ -1,0 +1,49 @@
+def laceStringsRecur(s1, s2):
+    """
+    s1 and s2 are strings.
+
+    Returns a new str with elements of s1 and s2 interlaced,
+    beginning with s1. If strings are not of same length, 
+    then the extra elements should appear at the end.
+    """
+    def helpLaceStrings(s1, s2, out):
+        if s1 == '':
+            return out + s2
+        if s2 == '':         
+            return out + s1
+        else:
+            print s1[1:]
+            print s2
+            return helpLaceStrings(s1[1:], s2[1:], out + s1[0] + s2[0])
+    
+    return helpLaceStrings(s1, s2, '')
+
+def McNuggets(n):
+    """
+    n is an int
+
+    Returns True if some integer combination of 6, 9 and 20 equals n
+    Otherwise returns False.
+    """
+    if n % 6 == 0 or n % 9 == 0 or n % 20 == 0:
+        return True
+
+    if n < 6:
+        return False
+
+    for i in range(n/6 + 1):
+        for j in range(n/9 + 1):
+            for k in range(n/20 + 1):
+                if 6*i + 9*j + 20*k == n:
+                    return (True, i, j, k)  
+    return False
+    
+print McNuggets(123442345)
+
+def babylon(a):
+    def test(x):
+        return 0.5 * ((a / x) + x)
+    return test
+
+def sqrt(a):
+    return fixedPoint(babylon(a), 0.0001)
